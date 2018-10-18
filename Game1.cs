@@ -14,7 +14,8 @@ namespace Squash
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        struct ball_colision_point {
+        struct ball_colision_point
+        {
 
             private int x_location;
             private int y_location;
@@ -22,9 +23,9 @@ namespace Squash
             public int Y_location { get => y_location; set => y_location = value; }
             public int X_location { get => x_location; set => x_location = value; }
 
-          
 
-            public void  update_location(int x_location,int y_location)
+
+            public void update_location(int x_location, int y_location)
             {
                 X_location = x_location;
                 Y_location = y_location;
@@ -40,10 +41,14 @@ namespace Squash
         private int window_width;
         private int window_height;
 
+        private Texture2D splash_screen;
+        private Texture2D menu;
         private Texture2D background;
         private Texture2D paddle;
         private Texture2D ball;
-        private Texture2D frame;
+
+        private Rectangle start_text = new Rectangle(640, 150, 240, 70);
+        private Rectangle exit_text = new Rectangle(675, 225, 240, 70);
 
         private Texture2D main_rectangle;
         private Texture2D left_rectangle;
@@ -63,7 +68,7 @@ namespace Squash
         private int points;
         private int penalty_points;
 
-        private bool[] where_colision= {false,false,false,false};
+        private bool[] where_colision = { false, false, false, false };
         //[0] - lewa
         //[1] - prawa
         //[2] - góra
@@ -73,11 +78,11 @@ namespace Squash
         private int x_paddle_location;
         private int y_paddle_location;
 
-      
+
         private int x_ball_location;
         private int y_ball_location;
 
-  
+
 
         private int main_rectangle_x_location;
         private int main_rectangle_y_location;
@@ -88,6 +93,15 @@ namespace Squash
         private int right_rectangle_x_location;
         private int right_rectangle_y_location;
 
+        private enum game_mode
+        {
+            Splash,
+            Menu,
+            Game
+        }
+
+        private game_mode game_state = game_mode.Splash;
+
 
 
         protected void update_window_bounds()
@@ -96,7 +110,7 @@ namespace Squash
             window_width = GraphicsDevice.Viewport.Bounds.Width;
         }
 
-        
+
 
         protected void set_up_ball()
         {
@@ -157,9 +171,9 @@ namespace Squash
             return answer;
         }
 
-        
 
-      
+
+
 
         protected bool is_collision_with_a_ball(Texture2D collision_object, int collision_object_x, int collision_object_y)
         {
@@ -167,7 +181,7 @@ namespace Squash
             bool answer = false;
 
 
-            if(is_intersection(collision_object, collision_object_x, collision_object_y, right_point))
+            if (is_intersection(collision_object, collision_object_x, collision_object_y, right_point))
             {
                 where_colision[0] = true;
             }
@@ -235,7 +249,15 @@ namespace Squash
             return answer;
         }
 
-       
+        protected bool if_mouse_within_rectangle(Rectangle rectangle)
+        {
+            bool answer = false;
+            
+
+            return answer;
+        }
+
+
 
         public Game1()
         {
@@ -259,7 +281,7 @@ namespace Squash
             set_up_game();
 
 
-
+            base.TargetElapsedTime = TimeSpan.FromSeconds(1.0 / 60.0);
 
             base.Initialize();
         }
@@ -282,15 +304,17 @@ namespace Squash
             ball = Content.Load<Texture2D>("images\\pilka");
             paddle = Content.Load<Texture2D>("images\\paletka");
             font = Content.Load<SpriteFont>("fonts\\wynik");
+            splash_screen = Content.Load<Texture2D>("images\\splash");
+            menu = Content.Load<Texture2D>("images\\menu");
 
-           
+
             main_rectangle_x_location = window_width / 2 - main_rectangle.Width / 2;
             main_rectangle_y_location = 0;
             left_rectangle_x_location = main_rectangle_x_location - left_rectangle.Width;
             left_rectangle_y_location = 0;
             right_rectangle_x_location = main_rectangle_x_location + main_rectangle.Width;
             right_rectangle_y_location = 0;
-           
+
 
         }
 
@@ -315,66 +339,88 @@ namespace Squash
 
             // TODO: Add your update logic here
 
+
+
             update_window_bounds();
 
-            if (newMouseState.X >= 0 && newMouseState.X <= window_width - paddle.Width)
+            if ((GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
+                || Keyboard.GetState().IsKeyDown(Keys.Enter)) && (game_state == game_mode.Splash))
             {
-                x_paddle_location = newMouseState.X;
+
+                game_state = game_mode.Menu;
+                this.IsMouseVisible = true;
+            }
+            else if (game_state == game_mode.Menu)
+            {
+                newMouseState = Mouse.GetState();
+
+                if ((newMouseState.LeftButton == ButtonState.Pressed) 
+                    && (oldMouseState.LeftButton == ButtonState.Released))
+
+                oldMouseState = newMouseState;
             }
 
 
-            if (wasBallShoot == false)
-            {
-                x_ball_location = x_paddle_location + 30;
-            }
-
-            newMouseState = Mouse.GetState();
-            if (newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && wasBallShoot == false)
-            {
-                shoot_ball(-x_speed, -y_speed);
-
-            }
-            if (newMouseState.RightButton == ButtonState.Pressed && oldMouseState.RightButton == ButtonState.Released && wasBallShoot == false)
-            {
-
-                shoot_ball(x_speed, -y_speed);
-
-            }
-            oldMouseState = newMouseState;
-
-            if (wasBallShoot == true)
+            else if (game_state == game_mode.Game)
             {
 
 
-                if (is_collision_with_a_ball(main_rectangle, main_rectangle_x_location, main_rectangle_y_location)
-                    || is_collision_with_a_ball(left_rectangle, left_rectangle_x_location, left_rectangle_y_location)
-                    || is_collision_with_a_ball(right_rectangle, right_rectangle_x_location, right_rectangle_y_location)
-                    || is_collision_with_a_ball(paddle, x_paddle_location, y_paddle_location))
+                if (newMouseState.X >= 0 && newMouseState.X <= window_width - paddle.Width)
                 {
-                    points++;
-                    deflect_ball();
-                    reset_collision_array();
-                    
+                    x_paddle_location = newMouseState.X;
                 }
 
-                x_ball_location += movmentVector[0];
-                y_ball_location += movmentVector[1];
 
-                top_point.update_location(x_ball_location+ball.Width/2,y_ball_location);
-                left_point.update_location(x_ball_location, y_ball_location + ball.Width / 2);
-                right_point.update_location(x_ball_location + ball.Width, y_ball_location + ball.Height / 2);
-                bottom_point.update_location(x_ball_location + ball.Width / 2, y_ball_location+ ball.Height);
+                if (wasBallShoot == false)
+                {
+                    x_ball_location = x_paddle_location + 30;
+                }
+
+                newMouseState = Mouse.GetState();
+                if (newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && wasBallShoot == false)
+                {
+                    shoot_ball(-x_speed, -y_speed);
+
+                }
+                if (newMouseState.RightButton == ButtonState.Pressed && oldMouseState.RightButton == ButtonState.Released && wasBallShoot == false)
+                {
+
+                    shoot_ball(x_speed, -y_speed);
+
+                }
+                oldMouseState = newMouseState;
+
+                if (wasBallShoot == true)
+                {
+
+
+                    if (is_collision_with_a_ball(main_rectangle, main_rectangle_x_location, main_rectangle_y_location)
+                        || is_collision_with_a_ball(left_rectangle, left_rectangle_x_location, left_rectangle_y_location)
+                        || is_collision_with_a_ball(right_rectangle, right_rectangle_x_location, right_rectangle_y_location)
+                        || is_collision_with_a_ball(paddle, x_paddle_location, y_paddle_location))
+                    {
+                        points++;
+                        deflect_ball();
+                        reset_collision_array();
+
+                    }
+
+                    x_ball_location += movmentVector[0];
+                    y_ball_location += movmentVector[1];
+
+                    top_point.update_location(x_ball_location + ball.Width / 2, y_ball_location);
+                    left_point.update_location(x_ball_location, y_ball_location + ball.Width / 2);
+                    right_point.update_location(x_ball_location + ball.Width, y_ball_location + ball.Height / 2);
+                    bottom_point.update_location(x_ball_location + ball.Width / 2, y_ball_location + ball.Height);
+                }
+
+                if (is_ball_out())
+                {
+                    penalty_points--;
+                    set_up_ball();
+
+                }
             }
-
-            if (is_ball_out())
-            {
-                penalty_points--;
-                set_up_ball();
-
-            }
-
-
-
 
             base.Update(gameTime);
         }
@@ -387,23 +433,51 @@ namespace Squash
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            int points_x_location = 10;
+            spriteBatch.Begin();
+            spriteBatch.Draw(background, new Rectangle(0, 0, window_width, window_height), Color.White);
+            spriteBatch.End();
+
+            if (game_state == game_mode.Splash)
+            {
+                spriteBatch.Begin();
+                spriteBatch.Draw(splash_screen, new Rectangle(0, 0, window_width, window_height), Color.White);
+                spriteBatch.End();
+
+            }
+            else if (game_state == game_mode.Menu)
+            {
+
+                spriteBatch.Begin();
+                spriteBatch.Draw(menu, new Rectangle(0, 0, window_width, window_height), Color.White);
+                //TODO: Prostokąty tekstu
+                spriteBatch.End();
+
+            }
+            else
+            {
+                int points_x_location = 10;
+
+                spriteBatch.Begin();
+
+                spriteBatch.Draw(left_rectangle, new Vector2(left_rectangle_x_location, left_rectangle_y_location), Color.White);
+                spriteBatch.Draw(right_rectangle, new Vector2(right_rectangle_x_location, right_rectangle_y_location), Color.White);
+                spriteBatch.Draw(paddle, new Vector2(x_paddle_location, y_paddle_location), Color.White);
+                spriteBatch.Draw(ball, new Vector2(x_ball_location, y_ball_location), Color.White);
+                spriteBatch.DrawString(font, "Punkty: " + points, new Vector2(points_x_location, 10), Color.Green);
+                spriteBatch.DrawString(font, "Punkty ujemne: " + penalty_points, new Vector2(window_width - 180, 10)
+                    , Color.Red);
+
+                spriteBatch.End();
+
+
+            }
+
+
+
 
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
 
-            spriteBatch.Draw(background, new Rectangle(0, 0, window_width, window_height), Color.White);
-            spriteBatch.Draw(main_rectangle, new Vector2(main_rectangle_x_location, main_rectangle_y_location), Color.White);
-            spriteBatch.Draw(left_rectangle, new Vector2(left_rectangle_x_location, left_rectangle_y_location), Color.White);
-            spriteBatch.Draw(right_rectangle, new Vector2(right_rectangle_x_location, right_rectangle_y_location), Color.White);
-            spriteBatch.Draw(paddle, new Vector2(x_paddle_location, y_paddle_location), Color.White);
-            spriteBatch.Draw(ball, new Vector2(x_ball_location, y_ball_location), Color.White);
-            spriteBatch.DrawString(font, "Punkty: " + points, new Vector2(points_x_location, 10), Color.Green);
-            spriteBatch.DrawString(font, "Punkty ujemne: " + penalty_points, new Vector2(window_width - 180, 10)
-                , Color.Red);
-
-            spriteBatch.End();
 
             base.Draw(gameTime);
         }

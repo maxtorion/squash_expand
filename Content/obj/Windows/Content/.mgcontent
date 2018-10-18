@@ -8,11 +8,15 @@
     <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/bramka.png</File>
     <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/duzy_prostokat.png</File>
     <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/maly_prostokat.png</File>
+    <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/menu.png</File>
     <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/paletka.png</File>
     <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/pilka.png</File>
+    <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/splash.png</File>
     <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/tlo.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

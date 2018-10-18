@@ -1,0 +1,8 @@
+
+*.xnb
+
+*.exe
+
+bin/Windows/x86/Debug/
+
+*.pdb

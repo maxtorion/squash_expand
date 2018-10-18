@@ -28,3 +28,5 @@ C:\Users\mateu\source\repos\Squash\Squash\bin\Windows\x86\Debug\Content\images\t
 C:\Users\mateu\source\repos\Squash\Squash\bin\Windows\x86\Debug\Content\fonts\wynik.xnb
 C:\Users\mateu\source\repos\Squash\Squash\bin\Windows\x86\Debug\Content\images\duzy_prostokat.xnb
 C:\Users\mateu\source\repos\Squash\Squash\bin\Windows\x86\Debug\Content\images\maly_prostokat.xnb
+C:\Users\mateu\source\repos\Squash\Squash\bin\Windows\x86\Debug\Content\images\splash.xnb
+C:\Users\mateu\source\repos\Squash\Squash\bin\Windows\x86\Debug\Content\images\menu.xnb
