@@ -35,6 +35,8 @@ namespace Squash
 
         private Texture2D splash_screen, menu, background, paddle, ball;
 
+        private Ai ai = new Ai();
+
         /// ////////////////////////// ////////////////////////// ///
         // TODO: Przenieść wartości do tablicy/kolekcji - użycie w wielu miejscach
         private Rectangle start_text = new Rectangle(640, 150, 240, 70);
@@ -42,6 +44,9 @@ namespace Squash
         /// //////////////////////////
 
         private Texture2D main_rectangle, left_rectangle, right_rectangle;
+        private Rectangle left_wall_rectangle, right_wall_rectnangle;
+
+
 
         //////////////////////////////////////////////////
         ///////////////////////////////////////////////////
@@ -55,14 +60,16 @@ namespace Squash
         private MouseState newMouseState, oldMouseState;
 
         private bool old_pause_button_state, new_pause_button_state;
+        private bool was_ai_set_up_for_a_shoot = false;
 
 
-        private bool was_p_pressed = false, was_p_released = false;
+        private bool is_game_paused = false;
+
 
         private bool wasBallShoot;
 
         private int[] movmentVector = { 0, 0 };
-        private int x_speed = 4, y_speed = 7;
+        private int x_speed = 4, y_speed = 4;
 
         private int points, penalty_points;
         /// ////////////////////////// ////////////////////////// ///
@@ -71,8 +78,8 @@ namespace Squash
         // [4] - góra-lewo [5] - góra-prawo [6] - dół-lewo [7] - dół-prawo
         private bool[] where_colision = { false, false, false, false, false, false, false, false };
         /// ////////////////////////// ////////////////////////// ///
-        private int x_paddle_location, y_paddle_location;
-        private int x_ball_location, y_ball_location;
+        private int x_paddle_location, y_paddle_location, paddle_width, x_target_paddle_location;
+        private int x_ball_location, y_ball_location, ball_width;
 
         private int main_rectangle_x_location, main_rectangle_y_location;
         private int left_rectangle_x_location, left_rectangle_y_location;
@@ -83,7 +90,7 @@ namespace Squash
         // TODO: Klasa Menu
         private enum game_mode
         {
-            Splash, Menu, Game, Summary, Pause
+            Splash, Menu, Game, Summary
         }
         private game_mode game_state = game_mode.Splash;
 
@@ -103,23 +110,22 @@ namespace Squash
 
             if (new_pause_button_state && !old_pause_button_state)
             {
-                was_p_pressed = false;
-                was_p_released = false;
 
-                if (game_state == game_mode.Pause)
+
+                if (is_game_paused == true)
                 {
-                    game_state = game_mode.Game;
+                    is_game_paused = false;
                     this.IsMouseVisible = false;
                     Mouse.SetPosition(x_paddle_location, y_paddle_location);
                 }
-                   
+
                 else
                 {
-                    game_state = game_mode.Pause;
+                    is_game_paused = true; ;
                     this.IsMouseVisible = true;
 
                 }
-                    
+
             }
             old_pause_button_state = new_pause_button_state;
 
@@ -137,7 +143,7 @@ namespace Squash
             movmentVector[1] = 0;
             wasBallShoot = false;
 
-            x_ball_location = x_paddle_location + 30;
+            x_ball_location = x_paddle_location+(paddle_width/2)-(ball_width/2);
             y_ball_location = y_paddle_location - 20;
         }
 
@@ -145,7 +151,12 @@ namespace Squash
         {
             movmentVector[0] = x_direction;
             movmentVector[1] = y_direction;
+
+            if(wasBallShoot==false)
+                switch_players();
+
             wasBallShoot = true;
+           
         }
 
         protected void set_up_game()
@@ -180,6 +191,11 @@ namespace Squash
             {
                 active_player = player_type.Human;
             }
+        }
+        protected bool is_game_over()
+        {
+            return penalty_points == -10;
+
         }
 
         private bool is_intersection(Texture2D collision_object, int collision_object_x, int collision_object_y, ball_colision_point coll_point)
@@ -217,6 +233,40 @@ namespace Squash
             return answer;
         }
         /// ////////////////////////// ////////////////////////// ///
+        /// 
+        private bool is_intersection(Rectangle collision_object, int collision_object_x, int collision_object_y, ball_colision_point coll_point)
+        {
+            bool answer = false;
+
+            if ((coll_point.X_location + movmentVector[0] >= collision_object_x)
+                && (coll_point.X_location + movmentVector[0] <= (collision_object_x + collision_object.Width))
+                && (coll_point.Y_location + movmentVector[1] >= collision_object_y)
+                && (coll_point.Y_location + movmentVector[1] <= (collision_object_y + collision_object.Height)))
+                answer = true;
+
+            return answer;
+        }
+        protected bool is_collision_with_a_ball(Rectangle collision_object, int collision_object_x, int collision_object_y)
+        {
+            bool answer = false;
+
+            if (is_intersection(collision_object, collision_object_x, collision_object_y, right_point)) where_colision[0] = true;
+            else if (is_intersection(collision_object, collision_object_x, collision_object_y, left_point)) where_colision[1] = true;
+            else if (is_intersection(collision_object, collision_object_x, collision_object_y, top_point)) where_colision[2] = true;
+            else if (is_intersection(collision_object, collision_object_x, collision_object_y, bottom_point)) where_colision[3] = true;
+            else if (is_intersection(collision_object, collision_object_x, collision_object_y, top_left_point)) where_colision[4] = true;
+            else if (is_intersection(collision_object, collision_object_x, collision_object_y, top_right_point)) where_colision[5] = true;
+            else if (is_intersection(collision_object, collision_object_x, collision_object_y, bottom_left_point)) where_colision[6] = true;
+            else if (is_intersection(collision_object, collision_object_x, collision_object_y, bottom_right_point)) where_colision[7] = true;
+
+            for (int i = 0; i < where_colision.Length; i++)
+            {
+                if (where_colision[i] == true)
+                    answer = true;
+            }
+
+            return answer;
+        }
 
         public bool is_negative(int number)
         {
@@ -227,19 +277,16 @@ namespace Squash
         {
             //czy w poziomie
             if ((where_colision[0] == true) || (where_colision[1] == true))
-                shoot_ball(movmentVector[0] * (-1), movmentVector[1]);
+                shoot_ball(movmentVector[0] * (-1), movmentVector[1] );
             else
-                shoot_ball(movmentVector[0], movmentVector[1] * (-1));
+                shoot_ball(movmentVector[0], movmentVector[1]*(-1));
         }
 
         protected bool is_ball_out()
         {
             bool answer = false;
 
-            if ((x_ball_location + ball.Width <= 0) ||
-                (x_ball_location >= window_width) ||
-                (y_ball_location + ball.Width <= 0) ||
-                (y_ball_location >= window_height))
+            if (y_ball_location >= window_height)
                 answer = true;
 
             return answer;
@@ -269,7 +316,7 @@ namespace Squash
         {
             // TODO: Add your initialization logic here
             update_window_bounds();
-            set_up_game();
+            
 
             base.TargetElapsedTime = TimeSpan.FromSeconds(1.0 / 60.0);
             base.Initialize();
@@ -312,6 +359,13 @@ namespace Squash
 
             right_rectangle_x_location = main_rectangle_x_location + main_rectangle.Width;
             right_rectangle_y_location = 0;
+
+            left_wall_rectangle = new Rectangle(-10, 0, 5, window_height);
+            right_wall_rectnangle = new Rectangle(0, window_width, 10, window_height);
+
+            paddle_width = paddle.Width;
+            ball_width = ball.Width;
+            
         }
 
         /// <summary>
@@ -339,7 +393,9 @@ namespace Squash
             /// ////////////////////////// ////////////////////////// ///
             /// TODO: Klasa Menu
             update_window_bounds();
+
             newMouseState = Mouse.GetState();
+
             if ((newMouseState.LeftButton == ButtonState.Pressed) &&
                 (oldMouseState.LeftButton == ButtonState.Released) &&
                 (game_state == game_mode.Splash))
@@ -352,7 +408,7 @@ namespace Squash
             else if (game_state == game_mode.Menu)
             {
 
-                newMouseState = Mouse.GetState();
+                
 
                 if ((newMouseState.LeftButton == ButtonState.Pressed)
                     && (oldMouseState.LeftButton == ButtonState.Released)
@@ -360,7 +416,8 @@ namespace Squash
                     && (newMouseState.Position.Y >= 150 && newMouseState.Position.Y <= 220))
                 {
                     game_state = game_mode.Game;
-                    oldMouseState = newMouseState;
+                    
+                    set_up_game();
                     this.IsMouseVisible = false;
                 }
                 else if ((newMouseState.LeftButton == ButtonState.Pressed)
@@ -369,26 +426,116 @@ namespace Squash
                     && (newMouseState.Position.Y >= 225 && newMouseState.Position.Y <= 295))
                     Exit();
             }
-            else if (game_state == game_mode.Game)
+            else if (game_state == game_mode.Game && is_game_paused == false)
             {
                 /// /// /// /// /// /// /// /// /// /// 
                 /// TODO: Klasa Game
+                /// 
                 try_to_pause_a_game();
 
-                if (newMouseState.X >= 0 && newMouseState.X <= window_width - paddle.Width)
-                    x_paddle_location = newMouseState.X;
+                if (active_player == player_type.Human)
+                {
+                    if (newMouseState.X >= 0 && newMouseState.X <= window_width - paddle.Width)
+                        x_paddle_location = newMouseState.X;
 
-                if (wasBallShoot == false)
-                    x_ball_location = x_paddle_location + 30;
+                    if (wasBallShoot == false)
+                        set_up_ball();
 
-                newMouseState = Mouse.GetState();
-                if (newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && wasBallShoot == false)
-                    shoot_ball(-x_speed, -y_speed);
+                    newMouseState = Mouse.GetState();
+                    if (newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && wasBallShoot == false)
+                        shoot_ball(-x_speed, -y_speed);
 
-                if (newMouseState.RightButton == ButtonState.Pressed && oldMouseState.RightButton == ButtonState.Released && wasBallShoot == false)
-                    shoot_ball(x_speed, -y_speed);
+                    if (newMouseState.RightButton == ButtonState.Pressed && oldMouseState.RightButton == ButtonState.Released && wasBallShoot == false)
+                        shoot_ball(x_speed, -y_speed);
+                }
+                //Tura Ai
+                else
+                {
+                    int x_direction;
+                    //wystrzeliwanie piłki
+                    if (wasBallShoot == false)
+                    {
+                        //ustalić parametry
+                        if (was_ai_set_up_for_a_shoot==false)
+                        {
+                           ai.set_direction_of_the_shoot();
 
-                oldMouseState = newMouseState;
+                          
+
+                           x_target_paddle_location = ai.generate_valid_x_location_to_shoot_ball(left_rectangle_x_location, left_rectangle_y_location, left_rectangle,
+                                                                                            right_rectangle_x_location, right_rectangle_y_location, right_rectangle,
+                                                                                            y_paddle_location,movmentVector[0],main_rectangle.Width, ball_width, paddle_width);
+                            was_ai_set_up_for_a_shoot = true;
+                        }
+                       
+                        // jeżeli paletka osiągnęła założoną pozycję, wystrzel
+                        if (x_paddle_location == x_target_paddle_location)
+                        {
+                            if (ai.shoot_left == 1)
+                            {
+                                shoot_ball(-x_speed, -y_speed);
+                            }
+                            else
+                            {
+                                shoot_ball(x_speed, -y_speed);
+                            }
+                            was_ai_set_up_for_a_shoot = false;
+
+                        }
+                        //jeżeli nie, przesuń paletkę
+                        else
+                        {
+                            
+                            if (x_target_paddle_location > x_paddle_location)
+                            {
+                                x_paddle_location+=1;
+                            }
+                            else
+                            {
+                                x_paddle_location-=1;
+                            }
+                            set_up_ball();
+                        }
+                        
+
+                       
+
+                    }
+                    if (movmentVector[1]>0)
+                    {
+                       
+                        if(is_negative(movmentVector[0]))
+                        {
+                            x_direction = -1;
+                        }
+                        else
+                        {
+                            x_direction = 1;
+                        }
+
+                        x_target_paddle_location = ai.generate_x_where_paddle_can_deflect(x_ball_location, y_ball_location, 
+                                                                                   ball_width,y_paddle_location, paddle_width,x_direction);
+
+                        if(x_target_paddle_location>=0 && x_target_paddle_location <= (window_width - paddle.Width))
+                        {
+                            if (x_target_paddle_location > x_paddle_location)
+                            {
+                                x_paddle_location += movmentVector[1]+1 ;
+                            }
+                            else
+                            {
+                                x_paddle_location -= movmentVector[1]+1;
+                            }
+                        }
+
+
+                    }
+                    Mouse.SetPosition(x_paddle_location, y_paddle_location);
+
+                }
+               
+
+               
 
                 /// ////////////////////////// ////////////////////////// ///
                 /// TODO: Klasa Colision
@@ -398,13 +545,21 @@ namespace Squash
 
 
                     {
-                        points++;
+                        if (active_player == player_type.AI)
+                        {
+                            points++;
+                        }
+
                         deflect_ball();
                         reset_collision_array();
 
                     }
+                    //TODO: Na boczne ściany stworzyć rectangle
                     else if (is_collision_with_a_ball(left_rectangle, left_rectangle_x_location, left_rectangle_y_location)
-                            || is_collision_with_a_ball(right_rectangle, right_rectangle_x_location, right_rectangle_y_location))
+                            || is_collision_with_a_ball(right_rectangle, right_rectangle_x_location, right_rectangle_y_location)
+                            || is_collision_with_a_ball(left_wall_rectangle, 0, 0)
+                            || is_collision_with_a_ball(right_wall_rectnangle,window_width,0)
+                            || y_ball_location<=0)
                     {
                         deflect_ball();
                         reset_collision_array();
@@ -433,16 +588,49 @@ namespace Squash
 
                 if (is_ball_out())
                 {
-                    penalty_points--;
+
+
+                    if(active_player == player_type.Human)
+                        penalty_points--;
+
                     switch_players();
                     set_up_ball();
 
+
+
+                }
+                if (is_game_over())
+                {
+                    game_state = game_mode.Summary;
+                    this.IsMouseVisible = true;
                 }
             }
-            else if (game_state == game_mode.Pause)
+            else if (is_game_paused)
             {
                 try_to_pause_a_game();
             }
+            //Tryb podsumowania gry
+            else
+            {
+                if ((newMouseState.LeftButton == ButtonState.Pressed)
+                  && (oldMouseState.LeftButton == ButtonState.Released)
+                  && (newMouseState.Position.X >= (window_width / 2) - 100 && newMouseState.Position.X <= (window_width / 2) - 60)
+                  && (newMouseState.Position.Y >= 240 && newMouseState.Position.Y <= 260))
+                {
+                    game_state = game_mode.Game;
+                    this.IsMouseVisible = false;
+                    set_up_game();
+                  
+                }
+                else if ((newMouseState.LeftButton == ButtonState.Pressed)
+                    && (oldMouseState.LeftButton == ButtonState.Released)
+                    && (newMouseState.Position.X >= (window_width / 2) && newMouseState.Position.X <= (window_width / 2)+40)
+                    && (newMouseState.Position.Y >= 240 && newMouseState.Position.Y <= 260))
+                    game_state = game_mode.Menu;
+
+
+            }
+            oldMouseState = newMouseState;
             base.Update(gameTime);
             /// /// /// /// /// /// /// /// /// /// 
         }
@@ -476,7 +664,7 @@ namespace Squash
                 spriteBatch.Draw(menu, new Rectangle(0, 0, window_width, window_height), Color.White);
                 spriteBatch.End();
             }
-            else
+            else if (game_state == game_mode.Game)
             {
                 int points_x_location = 10;
 
@@ -485,6 +673,9 @@ namespace Squash
                 spriteBatch.Draw(right_rectangle, new Vector2(right_rectangle_x_location, right_rectangle_y_location), Color.White);
                 spriteBatch.Draw(main_rectangle, new Vector2(main_rectangle_x_location, main_rectangle_y_location), Color.White);
 
+                
+
+                
                 if (active_player == player_type.Human)
                     spriteBatch.Draw(paddle, new Vector2(x_paddle_location, y_paddle_location), Color.Green);
                 else
@@ -499,12 +690,26 @@ namespace Squash
                 //////////////////////////////////////////////////
                 //////////////////////////////////////////////////
                 //////////////////////////////////////////////////
-                //TODO:zrobić osobną czcionkę od pazy i odpowiednio to wymierzyć
-                if (game_state == game_mode.Pause)
+                //TODO:zrobić osobną czcionkę od pauzy i odpowiednio to wymierzyć
+                if (is_game_paused == true)
                 {
-                    spriteBatch.DrawString(font, "PAUZA", new Vector2((window_width/2)-20, (window_height/2)-20), Color.White);
+                    spriteBatch.DrawString(font, "PAUZA", new Vector2((window_width / 2) - 20, (window_height / 2) - 20), Color.White);
+
                 }
 
+                spriteBatch.End();
+            }
+            //TODO: Zrobić osobną czcionkę do summary
+            else
+            {
+
+                //TODO: Dodać "punkty" po points
+                spriteBatch.Begin();
+                spriteBatch.DrawString(font, "Podsumowanie:", new Vector2((window_width / 2) - 100, 20), Color.White);
+                spriteBatch.DrawString(font, "Zdobyto " + points + " punktow ", new Vector2((window_width / 2) - 100, 60), Color.Green);
+                spriteBatch.DrawString(font, "Czy chcesz ropoczac nowa gre?", new Vector2((window_width / 2) - 180, 200), Color.White);
+                spriteBatch.DrawString(font, "TAK", new Vector2((window_width / 2) - 100, 240), Color.White);
+                spriteBatch.DrawString(font, "NIE", new Vector2((window_width / 2), 240), Color.White);
                 spriteBatch.End();
             }
             // TODO: Add your drawing code here
