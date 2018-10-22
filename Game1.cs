@@ -8,6 +8,11 @@ namespace Squash
 {
     public class Game1 : Game
     {
+
+        Menu menuObject = new Menu();
+
+
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -28,11 +33,8 @@ namespace Squash
 
         private MouseState newMouseState, oldMouseState;
 
-        private bool old_pause_button_state, new_pause_button_state;
+        //private bool old_pause_button_state, new_pause_button_state;
         private bool was_ai_set_up_for_a_shoot = false;
-
-
-        private bool is_game_paused = false;
 
 
         private bool wasBallShoot;
@@ -45,7 +47,10 @@ namespace Squash
         // [4] - góra-lewo [5] - góra-prawo [6] - dół-lewo [7] - dół-prawo
         private bool[] where_colision = { false, false, false, false, false, false, false, false };
 
-        private int x_paddle_location, y_paddle_location, paddle_width, x_target_paddle_location;
+        static public int x_paddle_location;
+        static public int y_paddle_location;
+
+        public int paddle_width, x_target_paddle_location;
         private int x_ball_location, y_ball_location, ball_width;
 
         private int main_rectangle_x_location, main_rectangle_y_location;
@@ -63,29 +68,7 @@ namespace Squash
             Human, AI
         }
         private player_type active_player = player_type.Human;
-
-        protected void try_to_pause_a_game()
-        {
-            new_pause_button_state = Keyboard.GetState().IsKeyDown(Keys.P);
-
-            if (new_pause_button_state && !old_pause_button_state)
-            {
-                if (is_game_paused == true)
-                {
-                    is_game_paused = false;
-                    this.IsMouseVisible = false;
-                    Mouse.SetPosition(x_paddle_location, y_paddle_location);
-                }
-                else
-                {
-                    is_game_paused = true; ;
-                    this.IsMouseVisible = true;
-                }
-
-            }
-            old_pause_button_state = new_pause_button_state;
-
-        }
+        //private object menuObject;
 
         protected void update_window_bounds()
         {
@@ -341,9 +324,9 @@ namespace Squash
                     && (newMouseState.Position.Y >= 225 && newMouseState.Position.Y <= 295))
                     Exit();
             }
-            else if (game_state == Menu.game_mode.Game && is_game_paused == false)
+            else if (game_state == Menu.game_mode.Game && menuObject.Get_is_game_paused().Equals(false))
             {
-                try_to_pause_a_game();
+                menuObject.try_to_pause_a_game();
 
                 if (active_player == player_type.Human)
                 {
@@ -492,9 +475,9 @@ namespace Squash
                     this.IsMouseVisible = true;
                 }
             }
-            else if (is_game_paused)
+            else if (menuObject.Get_is_game_paused().Equals(true))
             {
-                try_to_pause_a_game();
+                menuObject.try_to_pause_a_game();
             }
             //Tryb podsumowania gry
             else
@@ -559,7 +542,7 @@ namespace Squash
                 spriteBatch.DrawString(font, "Punkty: " + points, new Vector2(points_x_location, 10), Color.Green);
                 spriteBatch.DrawString(font, "Punkty ujemne: " + penalty_points, new Vector2(window_width - 180, 10), Color.Red);
                 //TODO:zrobić osobną czcionkę od pauzy i odpowiednio to wymierzyć
-                if (is_game_paused == true)
+                if (menuObject.Get_is_game_paused().Equals(true))
                 {
                     spriteBatch.DrawString(font, "PAUZA", new Vector2((window_width / 2) - 20, (window_height / 2) - 20), Color.White);
 
