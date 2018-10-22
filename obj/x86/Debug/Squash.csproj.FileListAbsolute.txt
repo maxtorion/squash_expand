@@ -30,3 +30,44 @@ C:\Users\mateu\source\repos\Squash\Squash\bin\Windows\x86\Debug\Content\images\d
 C:\Users\mateu\source\repos\Squash\Squash\bin\Windows\x86\Debug\Content\images\maly_prostokat.xnb
 C:\Users\mateu\source\repos\Squash\Squash\bin\Windows\x86\Debug\Content\images\splash.xnb
 C:\Users\mateu\source\repos\Squash\Squash\bin\Windows\x86\Debug\Content\images\menu.xnb
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\images\bramka.xnb
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\images\duzy_prostokat.xnb
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\images\maly_prostokat.xnb
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\images\menu.xnb
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\images\paletka.xnb
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\images\pilka.xnb
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\images\splash.xnb
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\images\tlo.xnb
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\Content\images\bramka.xnb
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\Content\images\duzy_prostokat.xnb
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\Content\images\maly_prostokat.xnb
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\Content\images\paletka.xnb
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\Content\images\pilka.xnb
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\Content\images\tlo.xnb
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\fonts\wynik.xnb
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\Content\fonts\wynik.xnb
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Squash.exe
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Squash.pdb
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\MonoGame.Framework.dll
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\SharpDX.dll
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\SharpDX.XInput.dll
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\MonoGame.Framework.xml
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\SharpDX.xml
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\SharpDX.XInput.xml
+E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+E:\Programowanie i Projektowanie Gier\squash_expand\obj\x86\Debug\Squash.csprojAssemblyReference.cache
+E:\Programowanie i Projektowanie Gier\squash_expand\obj\x86\Debug\Squash.csproj.CoreCompileInputs.cache
+E:\Programowanie i Projektowanie Gier\squash_expand\obj\x86\Debug\Squash.csproj.CopyComplete
+E:\Programowanie i Projektowanie Gier\squash_expand\obj\x86\Debug\Squash.exe
+E:\Programowanie i Projektowanie Gier\squash_expand\obj\x86\Debug\Squash.pdb

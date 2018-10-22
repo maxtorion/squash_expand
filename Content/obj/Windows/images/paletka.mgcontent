@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/mateu/source/repos/Squash/Squash/Content/images/paletka.png</SourceFile>
-  <SourceTime>2018-10-08T09:40:02.7770265+02:00</SourceTime>
-  <DestFile>C:/Users/mateu/source/repos/Squash/Squash/Content/bin/Windows/images/paletka.xnb</DestFile>
-  <DestTime>2018-10-20T19:21:10.25494+02:00</DestTime>
+  <SourceFile>E:/Programowanie i Projektowanie Gier/squash_expand/Content/images/paletka.png</SourceFile>
+  <SourceTime>2018-10-22T18:29:37.5375353+02:00</SourceTime>
+  <DestFile>E:/Programowanie i Projektowanie Gier/squash_expand/Content/bin/Windows/images/paletka.xnb</DestFile>
+  <DestTime>2018-10-22T18:39:46.0007548+02:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2018-09-23T23:55:52+02:00</ImporterTime>
+  <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2018-09-23T23:55:52+02:00</ProcessorTime>
+  <ProcessorTime>2017-03-01T16:05:36+01:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>

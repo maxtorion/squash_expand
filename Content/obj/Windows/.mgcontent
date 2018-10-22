@@ -4,25 +4,14 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/mateu/source/repos/Squash/Squash/Content/fonts/wynik.spritefont</File>
-    <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/bramka.png</File>
-    <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/duzy_prostokat.png</File>
-    <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/maly_prostokat.png</File>
-    <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/menu.png</File>
-    <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/paletka.png</File>
-    <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/pilka.png</File>
-    <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/splash.png</File>
-    <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/tlo.png</File>
+    <File>E:/Programowanie i Projektowanie Gier/squash_expand/Content/fonts/wynik.spritefont</File>
+    <File>E:/Programowanie i Projektowanie Gier/squash_expand/Content/images/bramka.png</File>
+    <File>E:/Programowanie i Projektowanie Gier/squash_expand/Content/images/duzy_prostokat.png</File>
+    <File>E:/Programowanie i Projektowanie Gier/squash_expand/Content/images/maly_prostokat.png</File>
+    <File>E:/Programowanie i Projektowanie Gier/squash_expand/Content/images/menu.png</File>
+    <File>E:/Programowanie i Projektowanie Gier/squash_expand/Content/images/paletka.png</File>
+    <File>E:/Programowanie i Projektowanie Gier/squash_expand/Content/images/pilka.png</File>
+    <File>E:/Programowanie i Projektowanie Gier/squash_expand/Content/images/splash.png</File>
+    <File>E:/Programowanie i Projektowanie Gier/squash_expand/Content/images/tlo.png</File>
   </SourceFiles>
-  <DestFiles>
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-  </DestFiles>
 </SourceFileCollection>
