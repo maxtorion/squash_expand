@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>E:/Programowanie i Projektowanie Gier/squash_expand/Content/images/paletka.png</SourceFile>
-  <SourceTime>2018-10-22T18:29:37.5375353+02:00</SourceTime>
+  <SourceTime>2018-10-23T16:15:09.6477908+02:00</SourceTime>
   <DestFile>E:/Programowanie i Projektowanie Gier/squash_expand/Content/bin/Windows/images/paletka.xnb</DestFile>
-  <DestTime>2018-10-22T18:39:46.0007548+02:00</DestTime>
+  <DestTime>2018-10-23T16:15:26.9225589+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

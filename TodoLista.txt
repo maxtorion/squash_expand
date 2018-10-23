@@ -1,4 +1,4 @@
-﻿Working Test
+﻿Working Test 2
 1) BUGI:
 	a) Animacja ustawiania paletki przez ai do odbicia piłki (nie jest płynna)
 	b) czasami piłka nabija się na tekstury
