@@ -116,3 +116,10 @@
 /processorParam:TextureFormat=Color
 /build:images/tlo.png
 
+#begin fonts/pause.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/pause.spritefont
+

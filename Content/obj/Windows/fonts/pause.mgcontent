@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>E:/Programowanie i Projektowanie Gier/squash_expand/Content/fonts/wynik.spritefont</SourceFile>
-  <SourceTime>2018-10-23T16:15:09.6412675+02:00</SourceTime>
-  <DestFile>E:/Programowanie i Projektowanie Gier/squash_expand/Content/bin/Windows/fonts/wynik.xnb</DestFile>
-  <DestTime>2018-10-23T16:45:57.6724355+02:00</DestTime>
+  <SourceFile>E:/Programowanie i Projektowanie Gier/squash_expand/Content/fonts/pause.spritefont</SourceFile>
+  <SourceTime>2018-10-23T16:32:18.6740964+02:00</SourceTime>
+  <DestFile>E:/Programowanie i Projektowanie Gier/squash_expand/Content/bin/Windows/fonts/pause.xnb</DestFile>
+  <DestTime>2018-10-23T16:45:57.93658+02:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

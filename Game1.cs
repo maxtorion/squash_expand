@@ -30,6 +30,7 @@ namespace Squash
         private Rectangle left_wall_rectangle, right_wall_rectnangle;
 
         private SpriteFont font;
+        private SpriteFont fontPause;
 
         private MouseState newMouseState, oldMouseState;
 
@@ -130,7 +131,7 @@ namespace Squash
         }
         protected bool is_game_over()
         {
-            return penalty_points == -10;
+            return penalty_points == -1;
 
         }
 
@@ -264,6 +265,7 @@ namespace Squash
             ball = Content.Load<Texture2D>("images\\pilka");
             paddle = Content.Load<Texture2D>("images\\paletka");
             font = Content.Load<SpriteFont>("fonts\\wynik");
+            //fontPause = Content.Load<SpriteFont>("fonts\\paues");
             splash_screen = Content.Load<Texture2D>("images\\splash");
             menu = Content.Load<Texture2D>("images\\menu");
 
@@ -485,7 +487,7 @@ namespace Squash
                 if ((newMouseState.LeftButton == ButtonState.Pressed)
                   && (oldMouseState.LeftButton == ButtonState.Released)
                   && (newMouseState.Position.X >= (window_width / 2) - 100 && newMouseState.Position.X <= (window_width / 2) - 60)
-                  && (newMouseState.Position.Y >= 240 && newMouseState.Position.Y <= 260))
+                  && (newMouseState.Position.Y >= 150 && newMouseState.Position.Y <= 170))
                 {
                     game_state = Menu.game_mode.Game;
                     this.IsMouseVisible = false;
@@ -495,15 +497,13 @@ namespace Squash
                 else if ((newMouseState.LeftButton == ButtonState.Pressed)
                     && (oldMouseState.LeftButton == ButtonState.Released)
                     && (newMouseState.Position.X >= (window_width / 2) && newMouseState.Position.X <= (window_width / 2)+40)
-                    && (newMouseState.Position.Y >= 240 && newMouseState.Position.Y <= 260))
+                    && (newMouseState.Position.Y >= 150 && newMouseState.Position.Y <= 170))
                     game_state = Menu.game_mode.Menu;
             }
             oldMouseState = newMouseState;
             base.Update(gameTime);
         }
 
-        /// ////////////////////////// ////////////////////////// ///
-        /// TODO: Jakaś klasa do rysowania lub zostawić - do rozwarzenia
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -555,11 +555,11 @@ namespace Squash
             {
                 //TODO: Dodać "punkty" po points
                 spriteBatch.Begin();
-                spriteBatch.DrawString(font, "Podsumowanie:", new Vector2((window_width / 2) - 100, 20), Color.White);
-                spriteBatch.DrawString(font, "Zdobyto " + points + " punktow ", new Vector2((window_width / 2) - 100, 60), Color.Green);
-                spriteBatch.DrawString(font, "Czy chcesz ropoczac nowa gre?", new Vector2((window_width / 2) - 180, 200), Color.White);
-                spriteBatch.DrawString(font, "TAK", new Vector2((window_width / 2) - 100, 240), Color.White);
-                spriteBatch.DrawString(font, "NIE", new Vector2((window_width / 2), 240), Color.White);
+                spriteBatch.DrawString(font, "Koniec gry", new Vector2((window_width / 2) - 80, 20), Color.White);
+                spriteBatch.DrawString(font, "Liczba zdobytych punktow: " + points, new Vector2((window_width / 2) - 160, 60), Color.White);
+                spriteBatch.DrawString(font, "Czy chcesz ropoczac nowa gre?", new Vector2((window_width / 2) - 180, 110), Color.White);
+                spriteBatch.DrawString(font, "TAK", new Vector2((window_width / 2) - 100, 150), Color.White);
+                spriteBatch.DrawString(font, "NIE", new Vector2((window_width / 2), 150), Color.White);
                 spriteBatch.End();
             }
             base.Draw(gameTime);

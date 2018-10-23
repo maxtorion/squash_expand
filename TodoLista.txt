@@ -1,5 +1,4 @@
-﻿Working Test 2
-1) BUGI:
+﻿1) BUGI:
 	a) Animacja ustawiania paletki przez ai do odbicia piłki (nie jest płynna)
 	b) czasami piłka nabija się na tekstury
 	c) Czasami, gdy ścieżka jest za krótka AI nie jest w stanie odpowiednio szybko się ustawić
@@ -16,5 +15,5 @@
 4) PODŚWIETLANIE WYBRANYCH OPCJI W MENU
 5) NOWA CZCIONKA DLA PAUZY
 6) PRZYSPIESZYĆ PALETKĘ, GDY AI PRÓBUJE WYSTRZELIĆ PIŁKĘ
-7) ZROBIĆ SUMMARY WIZUALNIE PRZYSTĘPNE
 8) DODAĆ DELTĘ CZAS DO RUCHU
+9) ZMIENIĆ LICZBĘ PUNKTOW DO STRACENIA
