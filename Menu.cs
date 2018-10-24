@@ -23,6 +23,11 @@ namespace Squash
             Splash, Menu, Game, Summary
         }
 
+        public enum level
+        {
+            Easy_Level, Middle_Level, Hard_Level
+        }
+
         public bool Get_is_game_paused()
         {
             return is_game_paused;

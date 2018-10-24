@@ -6,12 +6,6 @@
 
 2) REFAKTORYZACJA (od tego najlepiej zacząć)
 
-3) POZIOMY TRUDNOŚCI:
-	a)trzy
-	b)poziom trudności decyduje o wartości licznika do błędu, co odbicie przez a1 licznik jest dekrementowany,
-	  jak dojdzie do 0 to wprowadź błąd do równania (czyli zmień parametr szum z 0 na jeden)
-	c)Trzeba dać w menu, wizualnie najlepiej strzałki tak jak ma adam z sebą
-
 4) PODŚWIETLANIE WYBRANYCH OPCJI W MENU
 5) NOWA CZCIONKA DLA PAUZY
 6) PRZYSPIESZYĆ PALETKĘ, GDY AI PRÓBUJE WYSTRZELIĆ PIŁKĘ

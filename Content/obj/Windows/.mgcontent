@@ -14,5 +14,8 @@
     <File>E:/Programowanie i Projektowanie Gier/squash_expand/Content/images/splash.png</File>
     <File>E:/Programowanie i Projektowanie Gier/squash_expand/Content/images/tlo.png</File>
     <File>E:/Programowanie i Projektowanie Gier/squash_expand/Content/fonts/pause.spritefont</File>
+    <File>E:/Programowanie i Projektowanie Gier/squash_expand/Content/images/menu_easy.png</File>
+    <File>E:/Programowanie i Projektowanie Gier/squash_expand/Content/images/menu_hard.png</File>
+    <File>E:/Programowanie i Projektowanie Gier/squash_expand/Content/images/menu_middle.png</File>
   </SourceFiles>
 </SourceFileCollection>

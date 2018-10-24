@@ -18,7 +18,7 @@ namespace Squash
 
         private int window_width, window_height;
 
-        private Texture2D splash_screen, menu, background, paddle, ball;
+        private Texture2D splash_screen, menu, background, paddle, ball, menu_hard, menu_middle;
 
         private Ai ai = new Ai();
 
@@ -63,7 +63,13 @@ namespace Squash
             top_left_point, top_right_point, bottom_left_point, bottom_right_point;
 
         private Menu.game_mode game_state = Menu.game_mode.Splash;
- 
+        static private Menu.level level = Menu.level.Easy_Level;
+
+        static internal Menu.level Get_level()
+        {
+            return level;
+        }
+
         private enum player_type
         {
             Human, AI
@@ -267,7 +273,9 @@ namespace Squash
             font = Content.Load<SpriteFont>("fonts\\wynik");
             //fontPause = Content.Load<SpriteFont>("fonts\\paues");
             splash_screen = Content.Load<Texture2D>("images\\splash");
-            menu = Content.Load<Texture2D>("images\\menu");
+            menu = Content.Load<Texture2D>("images\\menu_easy");
+            menu_hard = Content.Load<Texture2D>("images\\menu_hard");
+            menu_middle = Content.Load<Texture2D>("images\\menu_middle");
 
             // Jakaś funkcja 
             main_rectangle_x_location = window_width / 2 - main_rectangle.Width / 2;
@@ -323,8 +331,33 @@ namespace Squash
                 else if ((newMouseState.LeftButton == ButtonState.Pressed)
                     && (oldMouseState.LeftButton == ButtonState.Released)
                     && (newMouseState.Position.X >= 675 && newMouseState.Position.X <= 915)
-                    && (newMouseState.Position.Y >= 225 && newMouseState.Position.Y <= 295))
+                    && (newMouseState.Position.Y >= 295 && newMouseState.Position.Y <= 365))
                     Exit();
+                else if((level == Menu.level.Easy_Level) &&
+                    (newMouseState.Position.X >= 870 && newMouseState.Position.X <= 920) &&
+                    (newMouseState.Position.Y >= 225 && newMouseState.Position.Y <= 295) &&
+                    (newMouseState.LeftButton == ButtonState.Pressed) &&
+                    (oldMouseState.LeftButton == ButtonState.Released))
+                {
+                    level = Menu.level.Middle_Level;
+
+                }
+                else if ((level == Menu.level.Middle_Level) &&
+                    (newMouseState.Position.X >= 870 && newMouseState.Position.X <= 920) &&
+                    (newMouseState.Position.Y >= 225 && newMouseState.Position.Y <= 295) &&
+                    (newMouseState.LeftButton == ButtonState.Pressed) &&
+                    (oldMouseState.LeftButton == ButtonState.Released))
+                {
+                    level = Menu.level.Hard_Level;
+                }
+                else if ((level == Menu.level.Hard_Level) &&
+                    (newMouseState.Position.X >= 870 && newMouseState.Position.X <= 920) &&
+                    (newMouseState.Position.Y >= 225 && newMouseState.Position.Y <= 295) &&
+                    (newMouseState.LeftButton == ButtonState.Pressed) &&
+                    (oldMouseState.LeftButton == ButtonState.Released))
+                {
+                    level = Menu.level.Easy_Level;
+                }
             }
             else if (game_state == Menu.game_mode.Game && menuObject.Get_is_game_paused().Equals(false))
             {
@@ -521,7 +554,12 @@ namespace Squash
             else if (game_state == Menu.game_mode.Menu)
             {
                 spriteBatch.Begin();
-                spriteBatch.Draw(menu, new Rectangle(0, 0, window_width, window_height), Color.White);
+                if(level == Menu.level.Easy_Level)
+                    spriteBatch.Draw(menu, new Rectangle(0, 0, window_width, window_height), Color.White);
+                else if(level == Menu.level.Middle_Level)
+                    spriteBatch.Draw(menu_middle, new Rectangle(0, 0, window_width, window_height), Color.White);
+                else if(level == Menu.level.Hard_Level)
+                    spriteBatch.Draw(menu_hard, new Rectangle(0, 0, window_width, window_height), Color.White);
                 spriteBatch.End();
             }
             else if (game_state == Menu.game_mode.Game)
@@ -542,7 +580,7 @@ namespace Squash
                 spriteBatch.DrawString(font, "Punkty: " + points, new Vector2(points_x_location, 10), Color.Green);
                 spriteBatch.DrawString(font, "Punkty ujemne: " + penalty_points, new Vector2(window_width - 180, 10), Color.Red);
                 //TODO:zrobić osobną czcionkę od pauzy i odpowiednio to wymierzyć
-                if (menuObject.Get_is_game_paused().Equals(true))
+                if (menuObject.Get_is_game_paused())
                 {
                     spriteBatch.DrawString(font, "PAUZA", new Vector2((window_width / 2) - 20, (window_height / 2) - 20), Color.White);
 

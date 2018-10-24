@@ -11,12 +11,9 @@ namespace Squash
 {
     class Ai
     {
-
-       
         private Random random_generator = new Random();
-        private int noise_parameter = 0;
+        private int noise_parameter;
         private int counter_to_error;
-
 
         //jeżeli 1 to strzelaj w lewo, jak 0 to w prawo
         public int shoot_left;
@@ -74,7 +71,10 @@ namespace Squash
             int center_of_the_ball_x = x_ball_location + (ball_width / 2);
             int distance_from_paddle = y_paddle_location - ball_bottom_location;
 
-          
+            if (Game1.Get_level() == Menu.level.Easy_Level) noise_parameter = 2;
+            else if (Game1.Get_level() == Menu.level.Middle_Level) noise_parameter = 1;
+            else if (Game1.Get_level() == Menu.level.Hard_Level) noise_parameter = 0;
+
             x = center_of_the_ball_x + (distance_from_paddle * direction_x)+(noise_parameter*paddle_width);
 
 
