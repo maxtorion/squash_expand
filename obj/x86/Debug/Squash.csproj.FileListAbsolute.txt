@@ -72,7 +72,6 @@ E:\Programowanie i Projektowanie Gier\squash_expand\obj\x86\Debug\Squash.csproj.
 E:\Programowanie i Projektowanie Gier\squash_expand\obj\x86\Debug\Squash.exe
 E:\Programowanie i Projektowanie Gier\squash_expand\obj\x86\Debug\Squash.pdb
 E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\fonts\pause.xnb
-E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\Content\fonts\pause.xnb
 E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\images\menu_easy.xnb
 E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\images\menu_hard.xnb
 E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\images\menu_middle.xnb

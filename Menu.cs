@@ -23,10 +23,7 @@ namespace Squash
             Splash, Menu, Game, Summary
         }
 
-        public enum level
-        {
-            Easy_Level, Middle_Level, Hard_Level
-        }
+
 
         public bool Get_is_game_paused()
         {
@@ -43,9 +40,9 @@ namespace Squash
                 {
                     is_game_paused = false;
                     this.IsMouseVisible = false;
-                    int x_paddle_location = Game1.x_paddle_location;
-                    int y_paddle_location = Game1.y_paddle_location;
-                    Mouse.SetPosition(x_paddle_location, y_paddle_location);
+                    double x_paddle_location = Game1.x_paddle_location;
+                    double y_paddle_location = Game1.y_paddle_location;
+                    Mouse.SetPosition((int)x_paddle_location, (int)y_paddle_location);
                 }
                 else
                 {

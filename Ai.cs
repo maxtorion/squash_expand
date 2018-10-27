@@ -12,16 +12,21 @@ namespace Squash
     class Ai
     {
         private Random random_generator = new Random();
-        private int noise_parameter;
-        private int counter_to_error;
+        private double noise_parameter = 0;
+        private double counter_to_error;
 
         //jeżeli 1 to strzelaj w lewo, jak 0 to w prawo
-        public int shoot_left;
+        public double shoot_left;
 
-        public struct Point
+        public enum level
         {
-            public int x_coordinate { get; set; }
-            public int y_coordinate { get; set; }
+            Easy_Level, Middle_Level, Hard_Level
+        }
+
+        public struct Podouble
+        {
+            public double x_coordinate { get; set; }
+            public double y_coordinate { get; set; }
 
         }
 
@@ -32,30 +37,30 @@ namespace Squash
 
         }
         //TODO: przyjrzeć się temu równaniu
-        public int generate_valid_x_location_to_shoot_ball(int left_rectangle_x_location,int left_rectangle_y_location, Texture2D left_rectangle, 
-                                                           int right_rectangle_x_location,int right_rectangle_y_location  ,Texture2D right_rectangle,
-                                                           int paddle_y ,int delta_X, int main_rectangle_width, int ball_width,int paddle_width)
+        public double generate_valid_x_location_to_shoot_ball(double left_rectangle_x_location,double left_rectangle_y_location, Texture2D left_rectangle, 
+                                                           double right_rectangle_x_location,double right_rectangle_y_location  ,Texture2D right_rectangle,
+                                                           double paddle_y ,double delta_X, double main_rectangle_width, double ball_width,double paddle_width)
         {
-            int x = 0;
+            double x = 0;
             if (shoot_left==1)
             {
-                int alfa = left_rectangle_x_location + left_rectangle.Width;
-                int distance_from_ball = (paddle_y-ball_width) - (left_rectangle_y_location + left_rectangle.Height);
-                int lower_bound = alfa + (delta_X * distance_from_ball);
-                int upper_bound = lower_bound + main_rectangle_width+1;
+                double alfa = left_rectangle_x_location + left_rectangle.Width;
+                double distance_from_ball = (paddle_y-ball_width) - (left_rectangle_y_location + left_rectangle.Height);
+                double lower_bound = alfa + (delta_X * distance_from_ball);
+                double upper_bound = lower_bound + main_rectangle_width+1;
 
-                x = random_generator.Next(lower_bound, upper_bound)+(paddle_width/2)-(ball_width/2);
+                x = random_generator.Next((int)lower_bound, (int)upper_bound)+(paddle_width/2)-(ball_width/2);
 
 
             }
             else
             {
-                int betta = right_rectangle_x_location;
-                int distance_from_ball = (paddle_y-ball_width) - (right_rectangle_y_location + right_rectangle.Height);
-                int upper_bound = betta + (delta_X * distance_from_ball)-1;
-                int lower_bound = upper_bound - main_rectangle_width;
+                double betta = right_rectangle_x_location;
+                double distance_from_ball = (paddle_y-ball_width) - (right_rectangle_y_location + right_rectangle.Height);
+                double upper_bound = betta + (delta_X * distance_from_ball)-1;
+                double lower_bound = upper_bound - main_rectangle_width;
 
-                x = random_generator.Next(lower_bound, upper_bound)-paddle_width-ball_width;
+                x = random_generator.Next((int)lower_bound, (int)upper_bound)-paddle_width-ball_width;
 
 
             }
@@ -63,18 +68,27 @@ namespace Squash
 
         }
 
-        public int generate_x_where_paddle_can_deflect(int x_ball_location, int y_ball_location,int ball_width, 
-                                                       int y_paddle_location,int paddle_width , int direction_x)
+        double chaneg_new = 0;
+        double change_old = 0;
+
+        
+
+        public double generate_x_where_paddle_can_deflect(double x_ball_location, double y_ball_location,double ball_width, 
+                                                       double y_paddle_location,double paddle_width , double direction_x)
         {
-            int x = 0;
-            int ball_bottom_location = y_ball_location + ball_width;
-            int center_of_the_ball_x = x_ball_location + (ball_width / 2);
-            int distance_from_paddle = y_paddle_location - ball_bottom_location;
+            double x = 0;
+            double ball_bottom_location = y_ball_location + ball_width;
+            double center_of_the_ball_x = x_ball_location + (ball_width / 2);
+            double distance_from_paddle = y_paddle_location - ball_bottom_location;
 
-            if (Game1.Get_level() == Menu.level.Easy_Level) noise_parameter = 2;
-            else if (Game1.Get_level() == Menu.level.Middle_Level) noise_parameter = 1;
-            else if (Game1.Get_level() == Menu.level.Hard_Level) noise_parameter = 0;
-
+            chaneg_new = Game1.Get_change();
+            if (change_old != chaneg_new)
+            {
+                change_old = chaneg_new;
+                if (Game1.Get_level() == level.Easy_Level) noise_parameter += 0.005;
+                else if (Game1.Get_level() == level.Middle_Level) noise_parameter = 0.003;
+                else if (Game1.Get_level() == level.Hard_Level) noise_parameter = 0.001;
+            }
             x = center_of_the_ball_x + (distance_from_paddle * direction_x)+(noise_parameter*paddle_width);
 
 
