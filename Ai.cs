@@ -37,9 +37,9 @@ namespace Squash
 
         }
         //TODO: przyjrzeć się temu równaniu
-        public double generate_valid_x_location_to_shoot_ball(double left_rectangle_x_location,double left_rectangle_y_location, Texture2D left_rectangle, 
-                                                           double right_rectangle_x_location,double right_rectangle_y_location  ,Texture2D right_rectangle,
-                                                           double paddle_y ,double delta_X, double main_rectangle_width, double ball_width,double paddle_width)
+        public double generate_valid_x_location_to_shoot_ball(double left_rectangle_x_location, double left_rectangle_y_location, Texture2D left_rectangle, 
+                      double right_rectangle_x_location, double right_rectangle_y_location, Texture2D right_rectangle,
+                      double paddle_y, double delta_X, double main_rectangle_width, double ball_width, double paddle_width)
         {
             double x = 0;
             if (shoot_left==1)
@@ -50,8 +50,6 @@ namespace Squash
                 double upper_bound = lower_bound + main_rectangle_width+1;
 
                 x = random_generator.Next((int)lower_bound, (int)upper_bound)+(paddle_width/2)-(ball_width/2);
-
-
             }
             else
             {
@@ -61,17 +59,12 @@ namespace Squash
                 double lower_bound = upper_bound - main_rectangle_width;
 
                 x = random_generator.Next((int)lower_bound, (int)upper_bound)-paddle_width-ball_width;
-
-
             }
             return x;
-
         }
 
         double chaneg_new = 0;
         double change_old = 0;
-
-        
 
         public double generate_x_where_paddle_can_deflect(double x_ball_location, double y_ball_location,double ball_width, 
                                                        double y_paddle_location,double paddle_width , double direction_x)
@@ -90,7 +83,6 @@ namespace Squash
                 else if (Game1.Get_level() == level.Hard_Level) noise_parameter = 0.001;
             }
             x = center_of_the_ball_x + (distance_from_paddle * direction_x)+(noise_parameter*paddle_width);
-
 
             return x;
         }

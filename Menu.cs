@@ -7,23 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace Squash
 {
     class Menu : Game
     {
-       // Game1 game = new Game1();
-
         private bool old_pause_button_state, new_pause_button_state;
         private bool is_game_paused = false;
-
 
         public enum game_mode
         {
             Splash, Menu, Game, Summary
         }
-
-
 
         public bool Get_is_game_paused()
         {
@@ -49,10 +43,8 @@ namespace Squash
                     is_game_paused = true; ;
                     this.IsMouseVisible = true;
                 }
-
             }
             old_pause_button_state = new_pause_button_state;
-
         }
     }
 }
