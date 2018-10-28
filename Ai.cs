@@ -15,6 +15,11 @@ namespace Squash
         private double noise_parameter = 0;
         private double counter_to_error;
 
+        internal void Set_noise_parameter()
+        {
+            noise_parameter = 0;
+        }
+
         //jeżeli 1 to strzelaj w lewo, jak 0 to w prawo
         public double shoot_left;
 
@@ -31,7 +36,7 @@ namespace Squash
 
         public void Set_direction_of_the_shoot()
         {
-            this.shoot_left = random_generator.Next(0, 2);
+               this.shoot_left = random_generator.Next(0, 2);
         }
         //TODO: przyjrzeć się temu równaniu
         public double generate_valid_x_location_to_shoot_ball(double left_rectangle_x_location, double left_rectangle_y_location, Texture2D left_rectangle, 
@@ -79,6 +84,7 @@ namespace Squash
                 else if (Game1.Get_level() == level.Middle_Level) noise_parameter += 0.003;
                 else if (Game1.Get_level() == level.Hard_Level) noise_parameter += 0.001;
             }
+            Console.WriteLine("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB" + noise_parameter);
             x = center_of_the_ball_x + (distance_from_paddle * direction_x)+(noise_parameter*paddle_width);
 
             return x;

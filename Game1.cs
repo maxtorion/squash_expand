@@ -103,6 +103,7 @@ namespace Squash
             movmentVector[1] = 0;
             wasBallShoot = false;
 
+            ai.Set_noise_parameter();
             x_ball_location = x_paddle_location+(paddle_width/2)-(ball_width/2);
             y_ball_location = y_paddle_location - 20;
         }
