@@ -13,8 +13,16 @@
     <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/pilka.png</File>
     <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/splash.png</File>
     <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/tlo.png</File>
+    <File>C:/Users/mateu/source/repos/Squash/Squash/Content/fonts/pause.spritefont</File>
+    <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/menu_easy.png</File>
+    <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/menu_hard.png</File>
+    <File>C:/Users/mateu/source/repos/Squash/Squash/Content/images/menu_middle.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

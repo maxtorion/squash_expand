@@ -38,7 +38,7 @@ namespace Squash
         {
                this.shoot_left = random_generator.Next(0, 2);
         }
-        //TODO: przyjrzeć się temu równaniu
+
         public double generate_valid_x_location_to_shoot_ball(double left_rectangle_x_location, double left_rectangle_y_location, Texture2D left_rectangle, 
                       double right_rectangle_x_location, double right_rectangle_y_location, Texture2D right_rectangle,
                       double paddle_y, double delta_X, double main_rectangle_width, double ball_width, double paddle_width)

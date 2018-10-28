@@ -144,7 +144,7 @@ namespace Squash
         }
         protected bool is_game_over()
         {
-            return penalty_points == -1;
+            return penalty_points == -3;
         }
 
         private bool is_intersection(Texture2D collision_object, double collision_object_x, double collision_object_y, Ball_colision_point coll_point)
@@ -393,9 +393,28 @@ namespace Squash
                         else
                         {
                             if (x_target_paddle_location > x_paddle_location)
-                                x_paddle_location+=1;
+                            {
+                                if (x_target_paddle_location - x_paddle_location > 5)
+                                {
+                                    x_paddle_location += 5;
+                                }
+                                else
+                                {
+                                    x_paddle_location += 1;
+                                }
+                            }
                             else
-                                x_paddle_location-=1;
+                            {
+                                if (x_paddle_location - x_target_paddle_location > 5)
+                                {
+                                    x_paddle_location -= 5;
+                                }
+                                else
+                                {
+                                    x_paddle_location -= 1;
+                                }
+
+                            }
                             set_up_ball();
                         }
                     }
@@ -407,11 +426,33 @@ namespace Squash
                             x_direction = 1;
                         x_target_paddle_location = ai.Generate_x_where_paddle_can_deflect(x_ball_location, y_ball_location, 
                                                                                    ball_width,y_paddle_location, paddle_width,x_direction);
-                        if(x_target_paddle_location>=0 && x_target_paddle_location <= (window_width - paddle.Width))
+                        if (x_target_paddle_location >= 0 && x_target_paddle_location <= (window_width - paddle.Width))
                             if (x_target_paddle_location > x_paddle_location)
-                                x_paddle_location += movmentVector[1]+1 ;
+                            {
+                                if (x_target_paddle_location - x_paddle_location > movmentVector[1] + 1)
+                                {
+                                    x_paddle_location += movmentVector[1]*2;
+                                }
+                                else
+                                {
+                                    x_paddle_location += 1;
+                                }
+                            }
                             else
-                                x_paddle_location -= movmentVector[1]+1;
+                            {
+                                if (x_paddle_location - x_target_paddle_location > movmentVector[1] + 1)
+                                {
+                                    x_paddle_location -= movmentVector[1]*2;
+                                }
+                                else
+                                {
+                                    x_paddle_location -= 1;
+                                }
+
+                            }
+                         
+                          
+                               
                     }
 
                     Mouse.SetPosition((int)x_paddle_location, (int)y_paddle_location);

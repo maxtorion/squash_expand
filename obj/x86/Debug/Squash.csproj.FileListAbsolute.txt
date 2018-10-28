@@ -75,3 +75,7 @@ E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Conten
 E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\images\menu_easy.xnb
 E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\images\menu_hard.xnb
 E:\Programowanie i Projektowanie Gier\squash_expand\bin\Windows\x86\Debug\Content\images\menu_middle.xnb
+C:\Users\mateu\source\repos\Squash\Squash\bin\Windows\x86\Debug\Content\images\menu_easy.xnb
+C:\Users\mateu\source\repos\Squash\Squash\bin\Windows\x86\Debug\Content\images\menu_hard.xnb
+C:\Users\mateu\source\repos\Squash\Squash\bin\Windows\x86\Debug\Content\images\menu_middle.xnb
+C:\Users\mateu\source\repos\Squash\Squash\bin\Windows\x86\Debug\Content\fonts\pause.xnb
