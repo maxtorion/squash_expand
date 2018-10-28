@@ -5,9 +5,6 @@
 	d) Prawdopodobnie w wyprowadzonych równaniach w Ai jest błąd, trzeba je przejrzeć
 
 2) REFAKTORYZACJA (od tego najlepiej zacząć)
-
-4) PODŚWIETLANIE WYBRANYCH OPCJI W MENU
-5) NOWA CZCIONKA DLA PAUZY
 6) PRZYSPIESZYĆ PALETKĘ, GDY AI PRÓBUJE WYSTRZELIĆ PIŁKĘ
 8) DODAĆ DELTĘ CZAS DO RUCHU
 9) ZMIENIĆ LICZBĘ PUNKTOW DO STRACENIA

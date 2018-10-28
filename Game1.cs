@@ -40,8 +40,6 @@ namespace Squash
 
         private Texture2D splash_screen, menu, background, paddle, ball, menu_hard, menu_middle;
 
-        
-
         private Rectangle start_text = new Rectangle(640, 150, 240, 70);
         private Rectangle exit_text = new Rectangle(675, 225, 240, 70);
 
@@ -316,7 +314,6 @@ namespace Squash
                     (newMouseState.Position.Y >= 150 && newMouseState.Position.Y <= 220))
                 {
                     game_state = Menu.game_mode.Game;
-                    
                     set_up_game();
                     this.IsMouseVisible = false;
                 }
@@ -325,21 +322,18 @@ namespace Squash
                     (newMouseState.Position.X >= 675 && newMouseState.Position.X <= 915) &&
                     (newMouseState.Position.Y >= 295 && newMouseState.Position.Y <= 365))
                          Exit();
-
                 else if((level == Ai.level.Easy_Level) &&
                     (newMouseState.Position.X >= 870 && newMouseState.Position.X <= 920) &&
                     (newMouseState.Position.Y >= 225 && newMouseState.Position.Y <= 295) &&
                     (newMouseState.LeftButton == ButtonState.Pressed) &&
                     (oldMouseState.LeftButton == ButtonState.Released))
                          level = Ai.level.Middle_Level;
-
                 else if ((level == Ai.level.Middle_Level) &&
                     (newMouseState.Position.X >= 870 && newMouseState.Position.X <= 920) &&
                     (newMouseState.Position.Y >= 225 && newMouseState.Position.Y <= 295) &&
                     (newMouseState.LeftButton == ButtonState.Pressed) &&
                     (oldMouseState.LeftButton == ButtonState.Released))
                          level = Ai.level.Hard_Level;
-
                 else if ((level == Ai.level.Hard_Level) &&
                     (newMouseState.Position.X >= 870 && newMouseState.Position.X <= 920) &&
                     (newMouseState.Position.Y >= 225 && newMouseState.Position.Y <= 295) &&
@@ -349,7 +343,7 @@ namespace Squash
             }
             else if (game_state == Menu.game_mode.Game && menuObject.Get_is_game_paused().Equals(false))
             {
-                menuObject.try_to_pause_a_game();
+                menuObject.Try_to_pause_a_game();
 
                 if (active_player == player_type.Human)
                 {
@@ -378,7 +372,7 @@ namespace Squash
                         //ustalić parametry
                         if (was_ai_set_up_for_a_shoot==false)
                         {
-                           ai.set_direction_of_the_shoot();
+                           ai.Set_direction_of_the_shoot();
 
                            x_target_paddle_location = ai.generate_valid_x_location_to_shoot_ball(left_rectangle_x_location, left_rectangle_y_location, left_rectangle,
                                         right_rectangle_x_location, right_rectangle_y_location, right_rectangle,
@@ -410,7 +404,7 @@ namespace Squash
                             x_direction = -1;
                         else
                             x_direction = 1;
-                        x_target_paddle_location = ai.generate_x_where_paddle_can_deflect(x_ball_location, y_ball_location, 
+                        x_target_paddle_location = ai.Generate_x_where_paddle_can_deflect(x_ball_location, y_ball_location, 
                                                                                    ball_width,y_paddle_location, paddle_width,x_direction);
                         if(x_target_paddle_location>=0 && x_target_paddle_location <= (window_width - paddle.Width))
                             if (x_target_paddle_location > x_paddle_location)
@@ -482,7 +476,7 @@ namespace Squash
                 }
             }
             else if (menuObject.Get_is_game_paused().Equals(true))
-                menuObject.try_to_pause_a_game();
+                menuObject.Try_to_pause_a_game();
             //Tryb podsumowania gry
             else
             {

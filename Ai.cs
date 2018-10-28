@@ -27,14 +27,11 @@ namespace Squash
         {
             public double x_coordinate { get; set; }
             public double y_coordinate { get; set; }
-
         }
 
-        public void set_direction_of_the_shoot()
+        public void Set_direction_of_the_shoot()
         {
-
             this.shoot_left = random_generator.Next(0, 2);
-
         }
         //TODO: przyjrzeć się temu równaniu
         public double generate_valid_x_location_to_shoot_ball(double left_rectangle_x_location, double left_rectangle_y_location, Texture2D left_rectangle, 
@@ -66,8 +63,8 @@ namespace Squash
         double chaneg_new = 0;
         double change_old = 0;
 
-        public double generate_x_where_paddle_can_deflect(double x_ball_location, double y_ball_location,double ball_width, 
-                                                       double y_paddle_location,double paddle_width , double direction_x)
+        public double Generate_x_where_paddle_can_deflect(double x_ball_location, double y_ball_location,double ball_width, 
+                      double y_paddle_location,double paddle_width , double direction_x)
         {
             double x = 0;
             double ball_bottom_location = y_ball_location + ball_width;
@@ -79,8 +76,8 @@ namespace Squash
             {
                 change_old = chaneg_new;
                 if (Game1.Get_level() == level.Easy_Level) noise_parameter += 0.005;
-                else if (Game1.Get_level() == level.Middle_Level) noise_parameter = 0.003;
-                else if (Game1.Get_level() == level.Hard_Level) noise_parameter = 0.001;
+                else if (Game1.Get_level() == level.Middle_Level) noise_parameter += 0.003;
+                else if (Game1.Get_level() == level.Hard_Level) noise_parameter += 0.001;
             }
             x = center_of_the_ball_x + (distance_from_paddle * direction_x)+(noise_parameter*paddle_width);
 

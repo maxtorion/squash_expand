@@ -24,7 +24,7 @@ namespace Squash
             return is_game_paused;
         }
 
-        public void try_to_pause_a_game()
+        public void Try_to_pause_a_game()
         {
             new_pause_button_state = Keyboard.GetState().IsKeyDown(Keys.P);
 
